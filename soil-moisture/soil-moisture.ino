@@ -3,9 +3,9 @@
 
 rgb_lcd lcd;
 
-const int colorR = 128;
-const int colorG = 0;
-const int colorB = 128;
+const int colorR = 0;
+const int colorG = 255;
+const int colorB = 0;
 const int dry = 599; // value for dry sensor
 const int wet = 253; // value for wet sensor
 const unsigned long SECOND = 1000; // 1 second = 1000 milliseconds
@@ -27,14 +27,14 @@ void loop() {
 
   int percentageConversion = map(sensorVal, wet, dry, 100, 0);
 
-  if (percentageConversion < 50) {
-    digitalWrite(2, HIGH);   // turn the LED on (HIGH is the voltage level)
-    delay(1000);             // wait for a second
-    digitalWrite(2, LOW);    // turn the LED off by making the voltage LOW
-    delay(1000);             // wait for a second 
+  if (percentageConversion < 70 && percentageConversion >=51 ) {
+    lcd.setRGB(255, 194, 0);
   }
 
-  
+  if (percentageConversion <= 50) {
+      lcd.setRGB(255, 0, 0);
+  }
+
   Serial.print(percentageConversion);
   Serial.println("%");
 
